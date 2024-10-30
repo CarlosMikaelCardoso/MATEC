@@ -70,35 +70,33 @@ void loop() {
     }
   }
 
-  // Verifica mensagens recebidas via LoRa
-  if (LoRaSerial.available()) {
+ // Lógica para enviar alerta
+if (LoRaSerial.available()) {
     String message = LoRaSerial.readStringUntil('\n'); // Lê até a nova linha
     Serial.print("Mensagem recebida: ");
     Serial.println(message);
     
     // Verifica se a mensagem é sobre a queda de energia
     if (message.equals("Energia caiu")) {
-      Serial.println("Alerta: Energia caiu! Enviando notificação para o Raspberry Pi.");
-      // Enviar notificação para o Raspberry Pi
-      if (WiFi.status() == WL_CONNECTED) {
-        HTTPClient alertHttp;
-        alertHttp.begin(alertUrl); // URL para enviar o alerta
-        alertHttp.addHeader("Content-Type", "application/json");
-
-        // Cria o payload para o alerta
-        String alertPayload = "{\"alert\": \"A energia caiu!\"}";
-        int alertResponseCode = alertHttp.POST(alertPayload); // Envia o alerta
-
-        if (alertResponseCode > 0) {
-          Serial.println("Alerta enviado com sucesso: " + alertPayload);
-        } else {
-          Serial.println("Erro ao enviar o alerta: " + String(alertResponseCode));
+        Serial.println("Alerta: Energia caiu! Enviando notificação via PushBullet.");
+        
+        // Envia notificação ao Raspberry
+        if (WiFi.status() == WL_CONNECTED) {
+            HTTPClient http;
+            http.begin(serverUrl);
+            http.addHeader("Content-Type", "application/json");
+            
+            String payload = "{\"power\": \"off\"}"; // Mensagem de queda de energia
+            int httpResponseCode = http.POST(payload);
+            
+            if (httpResponseCode > 0) {
+                Serial.println("Notificação de queda de energia enviada com sucesso!");
+            } else {
+                Serial.println("Erro ao enviar notificação de queda de energia");
+            }
+            http.end();
         }
-        alertHttp.end(); // Finaliza a conexão
-      } else {
-        Serial.println("WiFi não conectado, não é possível enviar o alerta.");
-      }
     }
-  }
+}
   delay(10000); // Espera de 10 segundos entre leituras
 }
