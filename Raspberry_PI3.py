@@ -40,11 +40,11 @@ def receive_data():
             
             if temperature >= 30 and not temperature_alert_sent:
                 print("Alerta: Temperatura acima de 30°C!")
-                send_push_notification("Alerta de Temperatura", f"Temperatura chegou a {temperature}°C!")
+                send_push_notification("Alerta de Temperatura", f"Temperatura chegou a {temperature}°C!, Acionando Ventilador")
                 temperature_alert_sent = True  # Marca que o alerta foi enviado
             elif temperature < 30 and temperature_alert_sent:
                 print("Alerta: Temperatura abaixo de 30°C!")
-                send_push_notification("Alerta de Temperatura", f"Temperatura diminuída para {temperature}°C!")
+                send_push_notification("Alerta de Temperatura", f"Temperatura diminuída para {temperature}°C!, Ventilador Desligado")
                 temperature_alert_sent = False  # Reseta o estado quando a temperatura cai abaixo de 30°C
         
         # Verifica alerta de queda de energia
