@@ -4,7 +4,7 @@ import requests
 app = Flask(__name__)
 
 # Configuração para notificar via Pushbullet
-PUSHBULLET_API_KEY = "o.GDsMyFtRG4IVAfvpgVJKRnyHKiVYjZuV"  # Insira sua chave de API aqui
+PUSHBULLET_API_KEY = "o.GDsMyFtRG4IVAfvpgVJKRnyHKiVYjZuV"  # Chave API
 temperature_alert_sent = False  # Variável de controle para o envio da notificação de temperatura
 power_alert_sent = False  # Variável de controle para o envio do alerta de queda de energia
 sound_alert_sent = False  # Variável de controle para o envio do alerta de som
