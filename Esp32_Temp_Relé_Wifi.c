@@ -7,7 +7,7 @@
 #define E32_TX 16 // Pino TX do módulo E32
 #define E32_RX 17 // Pino RX do módulo E32
 
-// Defina os pinos e a rede
+// Definição dos pinos e a rede
 #define ONE_WIRE_BUS 15
 #define RELAY_PIN 2     // Pino do relé
 #define SOUND_SENSOR_PIN 4  // Pino digital do sensor de som KY-037
