@@ -18,7 +18,7 @@ void loop() {
   // Lê a tensão do pino analógico
   int sensorValue = analogRead(ANALOG_PIN);
   // Converte o valor lido para a tensão correspondente (ajuste o fator de escala conforme necessário)
-  float voltage = sensorValue * (5.0 / 1023.0); // Assumindo 5V como referência
+  float voltage = sensorValue * (5.0 / 1023.0); // Define como 5V a tensão
 
   // Verifica se a tensão está abaixo de um certo limite
   if (voltage < 1.0) { // Ajuste o limite conforme necessário
