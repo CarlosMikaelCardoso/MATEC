@@ -60,7 +60,7 @@ def receive_data():
             if not sound_alert_sent:
                 send_push_notification("Alerta de Som", "Um som foi detectado!")
                 sound_alert_sent = True  # Marca que o alerta de som foi enviado
-        elif "sound" in data and data["sound"] != "detected":
+        else:
             sound_alert_sent = False  # Reseta o alerta de som quando não há som detectado
             
         return jsonify({"status": "success"}), 200
@@ -70,4 +70,4 @@ def receive_data():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
